@@ -1,0 +1,173 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arvo:wght@700&display=swap");
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #1d1e22;
+    height: 100vh;
+    position: relative;
+}
+
+h1 {
+    color: #d84c6e;
+    font-family: "Arvo", serif;
+    padding: 20px 40px;
+    font-size: 42px;
+    line-height: 52px;
+    margin: 30px 0;
+    text-align: center;
+}
+
+.title {
+    min-width: 350px;
+    max-height: 80px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    font-weight: 600;
+    margin-right: 50%;
+}
+
+.title text {
+    letter-spacing: 2px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+.title path {
+    stroke: #fff;
+    stroke-width: 4;
+    animation-delay: 1s;
+}
+
+.container {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 80%;
+}
+
+.control-group {
+    padding-top: 33px;
+    position: relative;
+    margin-bottom: 30px;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.control-group input[type="text"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    border: 6px solid #9fa6b3;
+    border-radius: 0;
+    background: #fff;
+    color: #222;
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    outline: none;
+    padding: 16px 15px;
+    -webkit-transition-property: border, padding;
+    transition-property: border, padding;
+    -webkit-transition-duration: 500ms;
+    transition-duration: 500ms;
+    -webkit-transition-timing-function: ease;
+    transition-timing-function: ease;
+    width: 100%;
+}
+
+.control-group input[type="text"]+label {
+    color: #fff;
+    display: block;
+    font-weight: 500;
+    left: 0;
+    position: absolute;
+    top: 0;
+    -webkit-transform-origin: bottom;
+    transform-origin: bottom;
+    -webkit-transition: -webkit-transform 375ms ease-in-out 0ms;
+    transition: -webkit-transform 375ms ease-in-out 0ms;
+    transition: transform 375ms ease-in-out 0ms;
+    transition: transform 375ms ease-in-out 0ms, -webkit-transform 375ms ease-in-out 0ms;
+    transition: transform 375ms ease-in-out 0ms, -webkit-transform 375ms ease-in-out 0ms;
+}
+
+.control-group input[type="text"]+label span {
+    background: #9fa6b3;
+    display: block;
+    padding: 5px 20px 5px 20px;
+    -webkit-transition: background 375ms ease-in-out 0ms, -webkit-transform 1ms ease-in-out 150ms;
+    transition: background 375ms ease-in-out 0ms, -webkit-transform 1ms ease-in-out 150ms;
+    -webkit-transition: background 375ms ease-in-out 0ms, -webkit-transform 1ms ease-in-out 150ms;
+    transition: background 375ms ease-in-out 0ms, -webkit-transform 1ms ease-in-out 150ms;
+    transition: transform 1ms ease-in-out 150ms, background 375ms ease-in-out 0ms;
+    transition: transform 1ms ease-in-out 150ms, background 375ms ease-in-out 0ms, -webkit-transform 1ms ease-in-out 150ms;
+    transition: transform 1ms ease-in-out 150ms, background 375ms ease-in-out 0ms, -webkit-transform 1ms ease-in-out 150ms;
+}
+
+.control-group input[type="text"]:focus {
+    border-color: #d84c6e;
+    padding-bottom: 2px;
+    padding-top: 30px;
+}
+
+.control-group input[type="text"]:focus+label {
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+}
+
+.control-group input[type="text"]:focus+label span {
+    background: #d84c6e;
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+}
+
+.submit:hover,
+.submit1:hover {
+    color: #d84c6e;
+}
+
+.submit,
+.submit1 {
+    --color: #9fa6b3;
+}
+
+.submit1 {
+    margin-right: 0px;
+    margin-left: 100%;
+}
+
+button {
+    background: none;
+    border: 2px solid;
+    font: inherit;
+    line-height: 1;
+    margin: 0.5em;
+    padding: 1em 2em;
+    color: var(--color);
+    -webkit-transition: 0.25s;
+    transition: 0.25s;
+    text-align: center;
+    display: inline-block;
+}
+
+button:hover,
+button:focus {
+    color: #fff;
+}
+
+.bts {
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+}

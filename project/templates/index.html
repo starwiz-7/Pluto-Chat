@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pluto-Chat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bitter:wght@400;700&family=Righteous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Luckiest+Guy">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="./static/index.css">
+
+</head>
+
+<body>
+
+
+    <svg class="title">
+        <text x="0" y="40">Pluto</text>
+        <path d="M 0 66 50 61"></path>
+    </svg>
+    <div class="btn">
+        
+        <a href="/create-room"><button class="b1">New Room</button></a>
+        <a href="/logout"><button class="b1">Logout</button></a>
+    </div>
+    <h1>{{ current_user.username }}</h1>
+    <ol class="articles">
+        {% for room in rooms %}
+        <li class="articles__article" style="--animation-order:1">
+            <a class="articles__link" href="/rooms/{{ room._id.room_id }}">
+                <div class="articles__content articles__content--lhs">
+                    <h2 class="articles__title">{{ room.room_name}}</h2>
+
+                </div>
+                <div class="articles__content articles__content--rhs" aria-hidden="true">
+                    <h2 class="articles__title">{{ room.room_name}}</h2>
+                </div>
+            </a>
+            <div class="btn">
+        <a href="{{ url_for('delete_room', room_id = room._id.room_id)}}"><button class="b1">Delete Room</button></a>
+    </div>
+        </li>
+        {% endfor %}
+    </ol>
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

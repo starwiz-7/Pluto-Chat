@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pluto-Chat</title>
+    <link rel="stylesheet" href="/static/create-room.css">
+    <script type="text/javascript"> 
+        window.history.forward(); 
+        function noBack() { 
+            window.history.forward(); 
+        } 
+    </script> 
+</head>
+
+<body>
+    <svg class="title">
+        <text x="0" y="40">Pluto</text>
+        <path d="M 0 66 50 61"></path>
+    </svg>
+    <div class="container">
+        <h1>Edit room</h1>
+        <h1>{{ message }}</h1>
+        <form method="post">
+            <div class="control-group">
+                <input id="room_name" type="text" name="room_name" placeholder="Enter Room name" value="{{ room.name }}" />
+
+                <label for="room_name">
+                    <span>Room name</span>
+                </label>
+            </div>
+
+            <div class="control-group">
+                <input id="members" type="text" name="members" placeholder="Enter members" value="{{ room_members_str }}" />
+
+                <label for="members">
+                    <span>Members:</span>
+                </label>
+            </div>
+            <div class="bts">
+                <button type="submit" class="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

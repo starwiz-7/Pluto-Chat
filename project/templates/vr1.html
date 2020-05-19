@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Pluto-Chat</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/static/vr1.css" />
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div class="menu">
+        <a href="/" class="back"><i class="fa fa-angle-left"></i></a>
+        <div class="name">{{ room.name }}</div>
+        <div class="members">
+            {% for member in room_members %} {{ member._id.username }} {% endfor %}
+        </div>
+    </div>
+    <ol class="chat">
+        {% for message in messages %} {% if message.sender != current_user.username %}
+        <li class="other">
+            <div class="msg">
+                <div class="user">{{ message.sender }}&nbsp;</div>
+                <p>
+                    {{ message.text }}
+                </p>
+                <time>{{ message.created_at }}&nbsp;</time>
+            </div>
+        </li>
+        {% else %}
+        <li class="self">
+            <div class="msg">
+                <p>{{ message.text }}</p>
+                <time>{{ message.created_at }}&nbsp;</time>
+            </div>
+        </li>
+        {% endif %} {% endfor %}
+    </ol>
+    <div class="typezone">
+        <textarea type="text" id="message_input" placeholder="Type your message here...."></textarea>
+        <input type="submit" class="send" id="message_input_form" value="Send" />
+        <div class="emojis">
+            <a href="{{ url_for('edit_room', room_id = room_id)}}" class="edit">Edit</a>
+			</div>
+		</div>
+		<!-- partial -->
+	</body>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+	<script>
+		const socket = io.connect("http://127.0.0.1:5000");
+
+		socket.on("connect", function () {
+			socket.emit("join_room", {
+				username: "{{ username }}",
+				room: "{{ room._id }}",
+			});
+
+			let message_input = document.getElementById("message_input");
+
+			document.getElementById("message_input_form").onclick = function (
+				e
+			) {
+				e.preventDefault();
+				let message = message_input.value.trim();
+				if (message.length) {
+					socket.emit("send_message", {
+						username: "{{ username }}",
+						room: "{{ room._id }}",
+						message: message,
+					});
+				}
+				message_input.value = "";
+				message_input.focus();
+			};
+		});
+
+		let page = 0;
+
+		function prepend_message(message, username, created_at) {
+			const newNode = document.createElement("div");
+			newNode.innerHTML = `<b>${username}&nbsp;[${created_at}]:&nbsp;</b> ${message}`;
+			const messages_div = document.getElementById("messages");
+			messages_div.insertBefore(newNode, messages_div.firstChild);
+		}
+
+		window.onbeforeunload = function () {
+			socket.emit("leave_room", {
+				username: "{{ username }}",
+				room: "{{ room._id }}",
+			});
+		};
+
+		socket.on("receive_message", function (data) {
+			console.log(data);
+			const newNode = document.createElement("li");
+			if (data.username !== "{{ username }}") {
+				newNode.innerHTML += `<div class="msg"><div class="user">${data.username}&nbsp;</div><p>${data.message}</p><time>${data.created_at}&nbsp;</time></div>`;
+				newNode.setAttribute("class", "other");
+			} else {
+				newNode.setAttribute("class", "self");
+				newNode.innerHTML = `<div class="msg"><p>${data.message}</p><time>${data.created_at}&nbsp;</time></div>`;
+			}
+			document.getElementsByClassName("chat")[0].appendChild(newNode);
+		});
+
+		socket.on("join_room_announcement", function (data) {
+			console.log(data);
+			if (data.username !== "{{ username }}") {
+				const newNode = document.createElement("p");
+				newNode.setAttribute("class", "notification");
+				newNode.innerHTML = `<b>${data.username}</b> has joined the room`;
+				document.getElementsByClassName("chat")[0].appendChild(newNode);
+			}
+		});
+
+		socket.on("leave_room_announcement", function (data) {
+			console.log(data);
+			const newNode = document.createElement("p");
+			newNode.setAttribute("class", "notification");
+			newNode.innerHTML = `<b>${data.username}</b> has left the room`;
+			document.getElementsByClassName("chat")[0].appendChild(newNode);
+		});
+	</script>
+</html>
