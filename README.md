@@ -35,6 +35,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install the pac
 pip install -r requirements.txt
 ```
 This command will install all the packages used to run the application.
+Change the client address in the database file to yours databse address.
 
 ## Using the app
 ```bash
