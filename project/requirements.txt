@@ -8,7 +8,7 @@ Flask-PyMongo==2.3.0
 Flask-SocketIO==4.3.0
 greenlet==0.4.15
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 MarkupSafe==1.1.1
 monotonic==1.5
 pymongo==3.10.1
